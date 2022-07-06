@@ -1,4 +1,3 @@
-//Validaciones para inputs
 var fecha = new Date();
 document.getElementById('fecha_ini').max = fecha.toISOString().split('T')[0];
 
@@ -23,7 +22,7 @@ RProfesor.addEventListener('input', (e)=>{
     datosProfesor.classList.remove('hidden');
 });
 
-//Validación para registro
+
 function verificarNombre(nombre){
     let especiales = String(".-,_<>#$%&/@=+*?¡¿?!{}[]\\|\"'`~`×¥¥¥´¶öµ;:ü®åäßð©æ¾");
     for(let i=0;i<especiales.length;i++){
@@ -75,7 +74,7 @@ function validarPresupuesto(){
     return estado;
 }
 
-//Creación del objeto y Array
+
 misProyectos = [];
 var ubicacion = 0;
 
