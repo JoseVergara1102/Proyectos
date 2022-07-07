@@ -63,10 +63,10 @@ function validarPresupuesto(){
     let estado = false;
     if(inputPresupuesto.value<10000000){
         error.classList.remove('hidden');
-        error.innerText = 'El presupuesto es menor de $10.000.000';
+        error.innerText = 'El presupuesto no puede ser menor de $10.000.000';
     } else if(inputPresupuesto.value>50000000){
         error.classList.remove('hidden');
-        error.innerText = 'El presupuesto es mayor a $50.000.000';
+        error.innerText = 'El presupuesto no puede ser mayor a $50.000.000';
     } else {
         error.classList.add('hidden');
         estado = true;
@@ -78,7 +78,7 @@ function validarPresupuesto(){
 misProyectos = [];
 var ubicacion = 0;
 
-//Registrar proyecto
+
 var inputCodigo = document.getElementById('codigo');
 var inputTipo = document.getElementById('tipo');
 var inputFechaIni = document.getElementById('fecha_ini');
@@ -89,7 +89,6 @@ function contarDias(pos){
     let fin = new Date(misProyectos[pos].fechaFin)
     let diasDif = fin.getTime()-inicio.getTime();
     console.log(diasDif);
-    // 1 día = 24 horas, 1 hora = 60 min, 1 min = 60 seg, 1 seg = 1000ms
     return Math.round(diasDif/(1000*60*60*24))
 }
 
