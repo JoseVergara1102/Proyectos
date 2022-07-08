@@ -126,7 +126,7 @@ function MostrarProyectos(){
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">                                    
                     <input type="button" onclick="Editar(${i})" value="Editar" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
                     <input type="button" onclick="Eliminar(${i})" value="Eliminar" class="cursor-pointer bg-red-600 text-red-200 text-sm p-1 border border-red-800">
-                    <input type="button" onclick="Vista_Rapida(${i})" value="Vista Rápida" class="cursor-pointer bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800">
+                    <input type="button" onclick="Vista_Rapida(${i})" value="Observar" class="cursor-pointer bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800">
                 </td>
             </tr>
         `
@@ -135,6 +135,7 @@ function MostrarProyectos(){
     document.getElementById('cuerpo').innerHTML = escrito;
 }
 
+//Con Esta funcion limpiamos los datos.
 function LimpiarDatos(){
         inputCodigo.value = "";
         inputNombre.value = "";
@@ -147,6 +148,7 @@ function LimpiarDatos(){
         inputDatos_Persona.value = "";
 }
 
+//Esta es la funcion que permite agregar los datos a nuestro array
 function Insertar_Proyecto() {
     persona = {
         cod: '',
@@ -159,6 +161,8 @@ function Insertar_Proyecto() {
         tipo_persona: '',
         dato_persona: ''
     }
+
+    //realizamos las validaciones del Responsable, del nombre del proyecto y del presupuesto.
     if(ValidacionNombre() && Validacion_De_Responsable() && Validacion_De_Presupuesto()){
         persona.cod = inputCodigo.value;
         persona.nom = inputNombre.value;
@@ -179,6 +183,8 @@ var boton_Agregar = document.getElementById("boton_Agregar");
 boton_Agregar.addEventListener('click', Insertar_Proyecto);
 
 var boton_Actualizar = document.getElementById("boton_Actualizar");
+
+//Con esta Funcion podemos editar los datos suministrados.
 function Editar(pos){
     lugar_Destino = pos;
     inputCodigo.value = proyectos_Desarrollados[pos].cod;
@@ -194,6 +200,7 @@ function Editar(pos){
     boton_Agregar.classList.add('hidden');
 }
 
+//Con esta funcion Actualizamos los nuevos datos insertados.
 function Actualizar(){
     proyectos_Desarrollados[lugar_Destino].cod = inputCodigo.value;
     proyectos_Desarrollados[lugar_Destino].nom = inputNombre.value;
@@ -211,11 +218,13 @@ function Actualizar(){
 }
 boton_Actualizar.addEventListener('click', Actualizar);
 
+//Eliminamos los fila seleccionada del array
 function Eliminar(pos){
     proyectos_Desarrollados.splice(pos, 1);
     MostrarProyectos();
 }
 
+//Esta funcion nos permite observar una vista rapida de todos los datos suministrados.
 function Vista_Rapida(pos){
     let escrito = `
         Código: ${proyectos_Desarrollados[pos].cod}
@@ -228,9 +237,9 @@ function Vista_Rapida(pos){
         Tipo persona: ${proyectos_Desarrollados[pos].tipo_persona}
     `;
     if(proyectos_Desarrollados[pos].tipo_persona=="estudiante"){
-        escrito += '   Semestre: '+ proyectos_Desarrollados[pos].dato_persona;
+        escrito += '  Semestre: '+ proyectos_Desarrollados[pos].dato_persona;
     } else {
-        escrito += '   Tipo profesor: '+ proyectos_Desarrollados[pos].dato_persona;
+        escrito += '  Tipo profesor: '+ proyectos_Desarrollados[pos].dato_persona;
     }
 
     alert(escrito);

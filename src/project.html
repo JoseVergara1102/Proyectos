@@ -9,20 +9,21 @@
 
     <style>
         .caja{
-            border: 1px solid rgb(40, 105, 204)
+            border: 1px solid rgb(232, 20, 7);
+            background: rgb(232, 20, 7, 0.100);
         }        
         
     </style>
 </head>
 <body>
 
-    <nav class="bg-indigo-500">
+    <nav class="md:bg-gray-800">
         <div class="container py-2 mx-auto px-10 flex flex-wrap items-center justify-between">
             
             <!-- BEGIN logo --> 
             <div  class="flex items-center">
-                <img src="images/logou2.png" class="h-14"> 
-                <h2 class="text-white">Universidad de Córdoba</h2>
+                <img src="images/logoproyecto.jpg" class="h-14">
+                <h2 class="font-bold text-white"> José Raúl Vergara Morillo</h2>
             </div>
             <!-- END logo -->
 
@@ -61,9 +62,9 @@
         </div>
     </nav>
 
-    <nav class="md:bg-gray-800 bg-gray-500 p-1">
+    <nav class="bg-red-600 bg-gray-500 p-1">
         <div class="container mx-auto px-10 w-full">
-            <ul class="flex flex-col justify-center md:flex-row mt-1 text-xs md:text-sm">
+            <ul class="font-semibold flex flex-col justify-left md:flex-row mt-1 text-xs md:text-sm">
                 <li>
                     <a href="#" class="transition hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 
                                       block py-2
@@ -95,20 +96,20 @@
         </div>
     </nav>
 
-    <div class="bg-gray-400 py-5">
-        <div class="bg-white container mx-auto px-5 py-4 rounded-xl">
+    <div class="bg-red-200 py-5">
+        <div class="bg-slate-50 container mx-auto px-5 py-4 rounded-xl">
             
-            <h1 class="text-center text-3xl">Mis Proyectos</h1>
+            <h1 class="font-bold text-center text-3xl">Mis Proyectos</h1>
              
-            <p class="text-center mb-5">
-                Administración general de mis proyectos
+            <p class="font-semibold text-center mb-5">
+                Administración General De Mis Proyectos
             </p>
 
             <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-5">
 
                 <div class="col-span-1">
                     <div class="shadow-lg p-3">
-                        <h1 class="text-center text-3xl">Nuevo proyecto</h1>
+                        <h1 class="font-bold text-black text-center text-3xl">Nuevo Proyecto</h1>
                         <form action="#">
                             <table>
                                 <tr>
@@ -204,9 +205,9 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <input type="button" id="boton_Agregar" value="Registrar Proyecto" class="bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
+                                        <input type="button" id="boton_Agregar" value="Registrar Proyecto" class="text-white font-semibold bg-red-600 p-2 hover:bg-gray-700 cursor-pointer">
                                         <br>
-                                        <input type="button" id="boton_Actualizar" value="Actualizar proyecto" class="hidden bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
+                                        <input type="button" id="boton_Actualizar" value="Actualizar proyecto" class="hidden bg-blue-400 p-2 border border-cyan-800 hover:bg-gray-700 cursor-pointer">
                                     </td>
                                 </tr>
                                 
@@ -216,9 +217,9 @@
                 </div>
                 
                 <div class="col-span-2">
-                    <h1 class="text-center text-3xl">Listado de proyectos</h1>
+                    <h1 class="font-bold bg-slate-50 text-gray-100 bg-red-600 text-center text-3xl">Listado de Proyectos</h1>
                     <table class="min-w-full">
-                        <thead class="bg-slate-50 border-b border-slate-200">
+                        <thead class="font-semibold bg-red-200 border-b border-red-600">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Nombre
@@ -250,10 +251,10 @@
         </div>
     </div>
 
-    <footer class="bg-gray-700 text-center text-white py-5 text-sm">
+    <footer class="bg-red-600 text-center font-bold text-black py-5 text-sm">
         <div class="flex justify-center"><img src="images/logou2.png" alt=""></div>
-        <div>Diplomado en desarrollo de aplicaciones orientadas a la nube</div>
         <div>Universidad de Córdoba</div>
+        <div>Trabajo Javascript Desarrollo Web 1</div>
     </footer>
     
     <script src="scripts/myscript.js"></script>
