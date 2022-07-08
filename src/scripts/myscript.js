@@ -1,32 +1,36 @@
-var fecha = new Date();
-document.getElementById('fecha_ini').max = fecha.toISOString().split('T')[0];
+//Realizamos la validacion de las fechas establecidas.
+var fecha_año = new Date();
+document.getElementById('fecha_año_ini').max = fecha_año.toISOString().split('T')[0];
 
-var REstudiante = document.getElementById('REstudiante');
-var RProfesor = document.getElementById('RProfesor');
-var datosEstudiante = document.getElementById('datosEstudiante');
-var datosProfesor = document.getElementById('datosProfesor');
-var inputTipoPersona = null;
-var inputDatoPersona = null;
+//Creamos las variables para el tipo de persona y su validacion.
+var T_Estudiante = document.getElementById('T_Estudiante');
+var T_Profesor = document.getElementById('T_Profesor');
+var datos_del_estudiante = document.getElementById('datos_del_estudiante');
+var datos_del_profesor = document.getElementById('datos_del_profesor');
+var inputT_Persona = null;
+var inputDatos_Persona = null;
 
-REstudiante.addEventListener('input', (e) => {
-    inputTipoPersona = REstudiante;
-    inputDatoPersona = document.getElementById('semestre');
-    datosEstudiante.classList.remove('hidden');
-    datosProfesor.classList.add('hidden');
+//Esta son las opciones que se despliegan al escoger estudiante.
+T_Estudiante.addEventListener('input', (e) => {
+    inputT_Persona = T_Estudiante;
+    inputDatos_Persona = document.getElementById('semestre');
+    datos_del_estudiante.classList.remove('hidden');
+    datos_del_profesor.classList.add('hidden');
 });
 
-RProfesor.addEventListener('input', (e)=>{
-    inputTipoPersona = RProfesor;
-    inputDatoPersona = document.getElementById('tipo_profesor');
-    datosEstudiante.classList.add('hidden');
-    datosProfesor.classList.remove('hidden');
+//Esta son las opciones que se despliegan al escoger profesor.
+T_Profesor.addEventListener('input', (e)=>{
+    inputT_Persona = T_Profesor;
+    inputDatos_Persona = document.getElementById('tipo_profesor');
+    datos_del_estudiante.classList.add('hidden');
+    datos_del_profesor.classList.remove('hidden');
 });
 
-
-function verificarNombre(nombre){
-    let especiales = String(".-,_<>#$%&/@=+*?¡¿?!{}[]\\|\"'`~`×¥¥¥´¶öµ;:ü®åäßð©æ¾");
-    for(let i=0;i<especiales.length;i++){
-    if (nombre.indexOf(especiales.charAt(i))!=-1) {
+//Creamos la funcion para validar el nombre del proyecto, esta se hace AlphaNumerico.
+function Validacion_De_Nombre(nombre){
+    let caracteres_especiales = String(".-,_<>#$%&/@=+*?¡¿?!{}[]\\|\"'`~`×¥¥¥´¶öµ;:ü®åäßð©æ¾");
+    for(let i=0;i<caracteres_especiales.length;i++){
+    if (nombre.indexOf(caracteres_especiales.charAt(i))!=-1) {
         return true;
     }
   }
@@ -35,8 +39,9 @@ function verificarNombre(nombre){
 
 var inputNombre = document.getElementById('nombre');
 var spanErrorNombre = document.getElementById('errorNombre');
-function validarNombre(){
-    if(verificarNombre(inputNombre.value)){
+
+function ValidacionNombre(){
+    if(Validacion_De_Nombre(inputNombre.value)){
         spanErrorNombre.classList.remove('hidden');
         return false;
     } else {
@@ -47,8 +52,11 @@ function validarNombre(){
 
 var inputResponsable = document.getElementById('responsable');
 var spanErrorResponsable = document.getElementById('errorResponsable');
-function validarResponsable(){
-    if(verificarNombre(inputResponsable.value)){
+
+
+//Funcion Encargada de realizar la validadcion del nombre del responsable, esta funcion es Alphanumerica tambien.
+function Validacion_De_Responsable(){
+    if(Validacion_De_Nombre(inputResponsable.value)){
         spanErrorResponsable.classList.remove('hidden');
         return false;
     } else {
@@ -57,171 +65,173 @@ function validarResponsable(){
     }
 }
 
+//Validacion de Presupuesto, para que este dentro del rango entre $10M y $50M.
 var inputPresupuesto = document.getElementById('presupuesto');
-function validarPresupuesto(){
-    let error = document.getElementById('errorPresupuesto');
-    let estado = false;
-    if(inputPresupuesto.value<10000000){
+function Validacion_De_Presupuesto(){
+    let error = document.getElementById('error_De_Presupuesto');
+    let posicion = false;
+    if(inputPresupuesto.value<=10000000){
         error.classList.remove('hidden');
-        error.innerText = 'El presupuesto no puede ser menor de $10.000.000';
-    } else if(inputPresupuesto.value>50000000){
+        error.innerText = 'El Presupuesto Minimo es de $10.000.000' ;
+    } else if(inputPresupuesto.value>=50000000){
         error.classList.remove('hidden');
-        error.innerText = 'El presupuesto no puede ser mayor a $50.000.000';
+        error.innerText = 'El Presupuesto Maximo es hasta $50.000.000';
     } else {
         error.classList.add('hidden');
-        estado = true;
+        posicion = true;
     }
-    return estado;
+    return posicion;
 }
 
-
-misProyectos = [];
-var ubicacion = 0;
+//Creamos nuestro vector.
+proyectos_Desarrollados = [];
+var lugar_Destino = 0;
 
 
 var inputCodigo = document.getElementById('codigo');
 var inputTipo = document.getElementById('tipo');
-var inputFechaIni = document.getElementById('fecha_ini');
-var inputFechaFin = document.getElementById('fecha_fin');
+var inputfecha_añoIni = document.getElementById('fecha_año_ini');
+var inputfecha_añoFin = document.getElementById('fecha_año_fin');
 
-function contarDias(pos){
-    let inicio = new Date(misProyectos[pos].fechaInicio);
-    let fin = new Date(misProyectos[pos].fechaFin)
-    let diasDif = fin.getTime()-inicio.getTime();
-    console.log(diasDif);
-    return Math.round(diasDif/(1000*60*60*24))
+//Esta funcion nos permite realizar el conteo pertinente a los dias en los cuales se le lleva trabajando al proyecto.
+function Contador_De_Dias(pos){
+    let f_inicio = new Date(proyectos_Desarrollados[pos].fecha_inicio_de_año);
+    let f_fin = new Date(proyectos_Desarrollados[pos].fecha_añoFin)
+    let diferencia_Dias = f_fin.getTime()-f_inicio.getTime();
+    console.log(diferencia_Dias);
+    return Math.round(diferencia_Dias/(1000*60*60*24))
 }
 
 
-function listarProyectos(){
-    let texto = "";
-    for (i in misProyectos) {
-        texto += `
+function MostrarProyectos(){
+    let escrito = "";
+    for (i in proyectos_Desarrollados) {
+        escrito += `
             <tr class="odd:bg-white even:bg-slate-50">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                    ${misProyectos[i].nom}
+                    ${proyectos_Desarrollados[i].nom}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${misProyectos[i].responsable}
+                    ${proyectos_Desarrollados[i].responsable}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${misProyectos[i].fechaInicio}
+                    ${proyectos_Desarrollados[i].fecha_inicio_de_año}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${misProyectos[i].fechaFin}
+                    ${proyectos_Desarrollados[i].fecha_añoFin}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${contarDias(i)}
+                    ${Contador_De_Dias(i)}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">                                    
-                    <input type="button" onclick="editar(${i})" value="Editar" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
-                    <input type="button" onclick="eliminar(${i})" value="Eliminar" class="cursor-pointer bg-red-600 text-red-200 text-sm p-1 border border-red-800">
-                    <input type="button" onclick="mostrar(${i})" value="Vista Rápida" class="cursor-pointer bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800">
+                    <input type="button" onclick="Editar(${i})" value="Editar" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
+                    <input type="button" onclick="Eliminar(${i})" value="Eliminar" class="cursor-pointer bg-red-600 text-red-200 text-sm p-1 border border-red-800">
+                    <input type="button" onclick="Vista_Rapida(${i})" value="Vista Rápida" class="cursor-pointer bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800">
                 </td>
             </tr>
         `
     }
 
-    document.getElementById('cuerpo').innerHTML = texto;
+    document.getElementById('cuerpo').innerHTML = escrito;
 }
 
-function limpiar(){
+function LimpiarDatos(){
         inputCodigo.value = "";
         inputNombre.value = "";
         inputTipo.value = "";
-        inputFechaIni.value = "";
-        inputFechaFin.value = "";
+        inputfecha_añoIni.value = "";
+        inputfecha_añoFin.value = "";
         inputResponsable.value = "";
         inputPresupuesto.value = "";
-        inputTipoPersona.value = "";
-        inputDatoPersona.value = "";
+        inputT_Persona.value = "";
+        inputDatos_Persona.value = "";
 }
 
-function agregarProyecto() {
+function Insertar_Proyecto() {
     persona = {
         cod: '',
         nom: '',
         tipo: '',
-        fechaInicio: '',
-        fechaFin: '',
+        fecha_inicio_de_año: '',
+        fecha_añoFin: '',
         responsable: '',
         presupuesto: 0,
         tipo_persona: '',
         dato_persona: ''
     }
-    if(validarNombre() && validarResponsable() && validarPresupuesto()){
+    if(ValidacionNombre() && Validacion_De_Responsable() && Validacion_De_Presupuesto()){
         persona.cod = inputCodigo.value;
         persona.nom = inputNombre.value;
         persona.tipo = inputTipo.value;
-        persona.fechaInicio = inputFechaIni.value;
-        persona.fechaFin = inputFechaFin.value;
+        persona.fecha_inicio_de_año = inputfecha_añoIni.value;
+        persona.fecha_añoFin = inputfecha_añoFin.value;
         persona.responsable = inputResponsable.value;
         persona.presupuesto = inputPresupuesto.value;
-        persona.tipo_persona = inputTipoPersona.value;
-        persona.dato_persona = inputDatoPersona.value;
-        misProyectos.push(persona);
-        listarProyectos();
-        limpiar();
-        alert('Proyecto registrado correctamente.')
+        persona.tipo_persona = inputT_Persona.value;
+        persona.dato_persona = inputDatos_Persona.value;
+        proyectos_Desarrollados.push(persona);
+        MostrarProyectos();
+        LimpiarDatos();
+        alert('El Proyecto Se Ha Registrado Exitosamente')
     }
 }
-var btnAgregar = document.getElementById("btnAgregar");
-btnAgregar.addEventListener('click', agregarProyecto);
+var boton_Agregar = document.getElementById("boton_Agregar");
+boton_Agregar.addEventListener('click', Insertar_Proyecto);
 
-var btnActualizar = document.getElementById("btnActualizar");
-function editar(pos){
-    ubicacion = pos;
-    inputCodigo.value = misProyectos[pos].cod;
-    inputNombre.value = misProyectos[pos].nom;
-    inputTipo.value = misProyectos[pos].tipo;
-    inputFechaIni.value = misProyectos[pos].fechaInicio;
-    inputFechaFin.value = misProyectos[pos].fechaFin;
-    inputResponsable.value = misProyectos[pos].responsable;
-    inputPresupuesto.value = misProyectos[pos].presupuesto;
-    inputTipoPersona.value = misProyectos[pos].tipo_persona;
-    inputDatoPersona.value = misProyectos[pos].dato_persona;
-    btnActualizar.classList.remove('hidden');
-    btnAgregar.classList.add('hidden');
+var boton_Actualizar = document.getElementById("boton_Actualizar");
+function Editar(pos){
+    lugar_Destino = pos;
+    inputCodigo.value = proyectos_Desarrollados[pos].cod;
+    inputNombre.value = proyectos_Desarrollados[pos].nom;
+    inputTipo.value = proyectos_Desarrollados[pos].tipo;
+    inputfecha_añoIni.value = proyectos_Desarrollados[pos].fecha_inicio_de_año;
+    inputfecha_añoFin.value = proyectos_Desarrollados[pos].fecha_añoFin;
+    inputResponsable.value = proyectos_Desarrollados[pos].responsable;
+    inputPresupuesto.value = proyectos_Desarrollados[pos].presupuesto;
+    inputT_Persona.value = proyectos_Desarrollados[pos].tipo_persona;
+    inputDatos_Persona.value = proyectos_Desarrollados[pos].dato_persona;
+    boton_Actualizar.classList.remove('hidden');
+    boton_Agregar.classList.add('hidden');
 }
 
-function actualizarDatos(){
-    misProyectos[ubicacion].cod = inputCodigo.value;
-    misProyectos[ubicacion].nom = inputNombre.value;
-    misProyectos[ubicacion].tipo = inputTipo.value;
-    misProyectos[ubicacion].fechaInicio = inputFechaIni.value;
-    misProyectos[ubicacion].fechaFin = inputFechaFin.value;
-    misProyectos[ubicacion].responsable = inputResponsable.value;
-    misProyectos[ubicacion].presupuesto = inputPresupuesto.value;
-    misProyectos[ubicacion].tipo_persona = inputTipoPersona.value;
-    misProyectos[ubicacion].dato_persona = inputDatoPersona.value;
-    btnActualizar.classList.add('hidden');
-    btnAgregar.classList.remove('hidden');
-    listarProyectos();
-    limpiar();
+function Actualizar(){
+    proyectos_Desarrollados[lugar_Destino].cod = inputCodigo.value;
+    proyectos_Desarrollados[lugar_Destino].nom = inputNombre.value;
+    proyectos_Desarrollados[lugar_Destino].tipo = inputTipo.value;
+    proyectos_Desarrollados[lugar_Destino].fecha_inicio_de_año = inputfecha_añoIni.value;
+    proyectos_Desarrollados[lugar_Destino].fecha_añoFin = inputfecha_añoFin.value;
+    proyectos_Desarrollados[lugar_Destino].responsable = inputResponsable.value;
+    proyectos_Desarrollados[lugar_Destino].presupuesto = inputPresupuesto.value;
+    proyectos_Desarrollados[lugar_Destino].tipo_persona = inputT_Persona.value;
+    proyectos_Desarrollados[lugar_Destino].dato_persona = inputDatos_Persona.value;
+    boton_Actualizar.classList.add('hidden');
+    boton_Agregar.classList.remove('hidden');
+    MostrarProyectos();
+    LimpiarDatos();
 }
-btnActualizar.addEventListener('click', actualizarDatos);
+boton_Actualizar.addEventListener('click', Actualizar);
 
-function eliminar(pos){
-    misProyectos.splice(pos, 1);
-    listarProyectos();
+function Eliminar(pos){
+    proyectos_Desarrollados.splice(pos, 1);
+    MostrarProyectos();
 }
 
-function mostrar(pos){
-    let texto = `
-        Código: ${misProyectos[pos].cod}
-        Nombre: ${misProyectos[pos].nom}
-        Tipo: ${misProyectos[pos].tipo}
-        Fecha Inicio: ${misProyectos[pos].fechaInicio}
-        Fecha Fin: ${misProyectos[pos].fechaFin}
-        Responsable: ${misProyectos[pos].responsable}
-        Presupuesto: ${misProyectos[pos].presupuesto}
-        Tipo persona: ${misProyectos[pos].tipo_persona}
+function Vista_Rapida(pos){
+    let escrito = `
+        Código: ${proyectos_Desarrollados[pos].cod}
+        Nombre: ${proyectos_Desarrollados[pos].nom}
+        Tipo: ${proyectos_Desarrollados[pos].tipo}
+        fecha_año Inicio: ${proyectos_Desarrollados[pos].fecha_inicio_de_año}
+        fecha_año Fin: ${proyectos_Desarrollados[pos].fecha_añoFin}
+        Responsable: ${proyectos_Desarrollados[pos].responsable}
+        Presupuesto: ${proyectos_Desarrollados[pos].presupuesto}
+        Tipo persona: ${proyectos_Desarrollados[pos].tipo_persona}
     `;
-    if(misProyectos[pos].tipo_persona=="estudiante"){
-        texto += '   Semestre: '+ misProyectos[pos].dato_persona;
+    if(proyectos_Desarrollados[pos].tipo_persona=="estudiante"){
+        escrito += '   Semestre: '+ proyectos_Desarrollados[pos].dato_persona;
     } else {
-        texto += '   Tipo profesor: '+ misProyectos[pos].dato_persona;
+        escrito += '   Tipo profesor: '+ proyectos_Desarrollados[pos].dato_persona;
     }
 
-    alert(texto);
+    alert(escrito);
 }

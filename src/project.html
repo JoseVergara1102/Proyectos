@@ -133,12 +133,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Fecha Inicio</td>
-                                    <td><input class="caja" type="date" name="fecha_ini" id="fecha_ini" min="2022-01-01"></td>
+                                    <td>fecha_año Inicio</td>
+                                    <td><input class="caja" type="date" name="fecha_año_ini" id="fecha_año_ini" min="2022-01-01"></td>
                                 </tr>
                                 <tr>
-                                    <td>Fecha Finalización</td>
-                                    <td><input class="caja" type="date" name="fecha_fin" id="fecha_fin" max="2022-12-31" min="2022-01-01"></td>
+                                    <td>fecha_año Finalización</td>
+                                    <td><input class="caja" type="date" name="fecha_año_fin" id="fecha_año_fin" max="2022-12-31" min="2022-01-01"></td>
                                 </tr>
                                 <tr>
                                     <td>Responsable</td>
@@ -151,7 +151,7 @@
                                     <td>Presupuesto</td>
                                     <td>
                                         <input class="caja" type="text" name="presupuesto" id="presupuesto">
-                                        <span id="errorPresupuesto" class="hidden text-xs text-red-600"></span>
+                                        <span id="error_De_Presupuesto" class="hidden text-xs text-red-600"></span>
                                     </td>
                                     
                                 </tr>
@@ -159,15 +159,15 @@
                                     <td>Tipo Persona</td>
                                     <td>
                                         Estudiante
-                                        <input type="radio" name="tipo_persona" id="REstudiante" value="estudiante">
+                                        <input type="radio" name="tipo_persona" id="T_Estudiante" value="estudiante">
                                         Profesor
-                                        <input type="radio" name="tipo_persona" id="RProfesor" value="profesor">
+                                        <input type="radio" name="tipo_persona" id="T_Profesor" value="profesor">
                                     </td>
                                 </tr>
 
 
                                 <!-- Datos profesor -->
-                                <tr id="datosProfesor" class="hidden">
+                                <tr id="datos_del_profesor" class="hidden">
                                     <td>Tipo profesor</td>
                                     <td>
                                         <select name="tipo_profesor" id="tipo_profesor" class="caja">
@@ -180,7 +180,7 @@
 
 
                                 <!-- Datos estudiante -->
-                                <tr id="datosEstudiante" class="hidden">
+                                <tr id="datos_del_estudiante" class="hidden">
                                     <td>Semestre Estudiante</td>
                                     <td>
                                         <select name="semestre" id="semestre" class="caja">
@@ -204,9 +204,9 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <input type="button" id="btnAgregar" value="Registrar Proyecto" class="bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
+                                        <input type="button" id="boton_Agregar" value="Registrar Proyecto" class="bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
                                         <br>
-                                        <input type="button" id="btnActualizar" value="Actualizar proycto" class="hidden bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
+                                        <input type="button" id="boton_Actualizar" value="Actualizar proyecto" class="hidden bg-blue-400 p-2 border border-cyan-800 cursor-pointer">
                                     </td>
                                 </tr>
                                 
@@ -227,10 +227,10 @@
                                     Responsable
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Fecha Inicio
+                                    fecha_año Inicio
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Fecha Fin
+                                    fecha_año Fin
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Dias de Ejecución
