@@ -5,8 +5,10 @@ document.getElementById('fecha_año_ini').max = fecha_año.toISOString().split('
 //Creamos las variables para el tipo de persona y su validacion.
 var T_Estudiante = document.getElementById('T_Estudiante');
 var T_Profesor = document.getElementById('T_Profesor');
+var T_Otro = document.getElementById('T_Otro')
 var datos_del_estudiante = document.getElementById('datos_del_estudiante');
 var datos_del_profesor = document.getElementById('datos_del_profesor');
+var otro_dato = document.getElementById('otro_dato');
 var inputT_Persona = null;
 var inputDatos_Persona = null;
 
@@ -16,6 +18,7 @@ T_Estudiante.addEventListener('input', (e) => {
     inputDatos_Persona = document.getElementById('semestre');
     datos_del_estudiante.classList.remove('hidden');
     datos_del_profesor.classList.add('hidden');
+    otro_dato.classList.add('hidden');
 });
 
 //Esta son las opciones que se despliegan al escoger profesor.
@@ -24,6 +27,15 @@ T_Profesor.addEventListener('input', (e)=>{
     inputDatos_Persona = document.getElementById('tipo_profesor');
     datos_del_estudiante.classList.add('hidden');
     datos_del_profesor.classList.remove('hidden');
+    otro_dato.classList.add('hidden');
+});
+
+T_Otro.addEventListener('input', (e)=>{
+    inputT_Persona = T_Otro;
+    inputDatos_Persona = document.getElementById('otro_dato');
+    datos_del_estudiante.classList.add('hidden');
+    datos_del_profesor.classList.add('hidden');
+    otro_dato.classList.remove('hidden');
 });
 
 //Creamos la funcion para validar el nombre del proyecto, esta se hace AlphaNumerico.

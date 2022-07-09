@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -109,7 +109,7 @@
 
                 <div class="col-span-1">
                     <div class="shadow-lg p-3">
-                        <h1 class="font-bold text-black text-center text-3xl">Nuevo Proyecto</h1>
+                        <h1 class="bg-red-600 font-bold text-white text-center text-3xl">Nuevo Proyecto</h1>
                         <form action="#">
                             <table>
                                 <tr>
@@ -127,7 +127,7 @@
                                     <td>Tipo Proyecto</td>
                                     <td>
                                         <select name="tipo" id="tipo" class="caja">
-                                            <option value="">Seleccione el tipo de proyecto...</option>
+                                            <option value="">Seleccione el Tipo de Proyecto...</option>
                                             <option value="Investigación">Investigación</option>
                                             <option value="Extensión">Extensión</option>
                                         </select>
@@ -163,6 +163,8 @@
                                         <input type="radio" name="tipo_persona" id="T_Estudiante" value="estudiante">
                                         Profesor
                                         <input type="radio" name="tipo_persona" id="T_Profesor" value="profesor">
+                                        Otro
+                                        <input type="radio" name="tipo_persona" id="T_Otro" value="otro">
                                     </td>
                                 </tr>
 
@@ -171,7 +173,8 @@
                                 <tr id="datos_del_profesor" class="hidden">
                                     <td>Tipo profesor</td>
                                     <td>
-                                        <select name="tipo_profesor" id="tipo_profesor" class="caja">
+                                        <select name="tipo_profesor" id="tipo_profesor" class="hover:scale-110 caja">
+                                            <option value="">Seleccione el Tipo...</option>
                                             <option value="Planta">Planta</option>
                                             <option value="Catedratico">Catedratico</option>
                                             <option value="Ocasional">Ocasional</option>
@@ -184,7 +187,8 @@
                                 <tr id="datos_del_estudiante" class="hidden">
                                     <td>Semestre Estudiante</td>
                                     <td>
-                                        <select name="semestre" id="semestre" class="caja">
+                                        <select name="semestre" id="semestre" class="hover:scale-110 caja">
+                                            <option value="">Seleccione el Semestre...</option>
                                             <option value="I">I</option>
                                             <option value="II">II</option>
                                             <option value="III">III</option>
@@ -200,7 +204,18 @@
                                     </td>
                                 </tr>
 
-
+                                <!-- Datos Otro Cargo -->
+                                <tr id="otro_dato" class="hidden">
+                                    <td>Otro Cargo</td>
+                                    <td>
+                                        <select name="otro_dato" id="otro_dato" class="hover:scale-110 caja">
+                                            <option value="">Seleccione su Cargo...</option>
+                                            <option value="Administrativo">Administrativo</option>
+                                            <option value="Vigilante">Vigilante</option>
+                                            <option value="Aseador">Aseador</option>
+                                        </select>
+                                    </td>
+                                </tr>
 
                                 <tr>
                                     <td>&nbsp;</td>
@@ -221,22 +236,22 @@
                     <table class="min-w-full">
                         <thead class="font-semibold bg-red-200 border-b border-red-600">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Nombre
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Responsable
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Fecha De Inicio
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Fecha De Fin
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Dias de Ejecución
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                <th scope="col" class="hover:scale-110 px-6 py-3 text-left text-sm font-medium text-slate-900">
                                     Acciones
                                 </th>
                             </tr>
