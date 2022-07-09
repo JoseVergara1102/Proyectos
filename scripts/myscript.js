@@ -179,6 +179,7 @@ function Insertar_Proyecto() {
         alert('El Proyecto Se Ha Registrado Exitosamente')
     }
 }
+
 var boton_Agregar = document.getElementById("boton_Agregar");
 boton_Agregar.addEventListener('click', Insertar_Proyecto);
 
