@@ -176,7 +176,9 @@ function Insertar_Proyecto() {
         proyectos_Desarrollados.push(persona);
         MostrarProyectos();
         LimpiarDatos();
-        alert('El Proyecto Se Ha Registrado Exitosamente')
+        alert('PROYECTO REGISTRADO')
+    }else{
+        alert('AUN NO SE PUEDE REGISTRAR EL PROYECTO')
     }
 }
 
