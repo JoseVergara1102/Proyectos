@@ -178,7 +178,7 @@ function Insertar_Proyecto() {
         LimpiarDatos();
         alert('PROYECTO REGISTRADO')
     }else{
-        alert('AUN NO SE PUEDE REGISTRAR EL PROYECTO')
+        alert('AUN NO SE PUEDE REGISTRAR EL PROYECTO9')
     }
 }
 
