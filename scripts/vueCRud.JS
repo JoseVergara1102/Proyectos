@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 new Vue({
     el: "main",
     data: {
@@ -112,7 +111,6 @@ new Vue({
 })
 
 var fecha_año = new Date();
-=======
 new Vue({
     el: "main",
     data: {
@@ -226,5 +224,4 @@ new Vue({
 })
 
 var fecha_año = new Date();
->>>>>>> ac12dd4ad8e32b6d869e906b6ce5e630cd450354
 document.getElementById('fecha_año_ini').max = fecha_año.toISOString().split('T')[0];
