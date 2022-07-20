@@ -26,7 +26,7 @@ T_Profesor.addEventListener('input', (e)=>{
     datos_del_profesor.classList.remove('hidden');
 });
 
-//Creamos la funcion para validar el nombre del proyecto, esta se hace AlphaNumerico.
+//Creamos la funcion para validar el nombre del project, esta se hace AlphaNumerico.
 function Validacion_De_Nombre(nombre){
     let caracteres_especiales = String(".-,_<>#$%&/@=+*?¡¿?!{}[]\\|\"'`~`×¥¥¥´¶öµ;:ü®åäßð©æ¾");
     for(let i=0;i<caracteres_especiales.length;i++){
@@ -84,7 +84,7 @@ function Validacion_De_Presupuesto(){
 }
 
 //Creamos nuestro vector.
-proyectos_Desarrollados = [];
+projects_Desarrollados = [];
 var lugar_Destino = 0;
 
 
@@ -93,38 +93,38 @@ var inputTipo = document.getElementById('tipo');
 var inputfecha_añoIni = document.getElementById('fecha_año_ini');
 var inputfecha_añoFin = document.getElementById('fecha_año_fin');
 
-//Esta funcion nos permite realizar el conteo pertinente a los dias en los cuales se le lleva trabajando al proyecto.
+//Esta funcion nos permite realizar el conteo pertinente a los dias en los cuales se le lleva trabajando al project.
 function Contador_De_Dias(pos){
-    let f_inicio = new Date(proyectos_Desarrollados[pos].fecha_inicio_de_año);
-    let f_fin = new Date(proyectos_Desarrollados[pos].fecha_añoFin)
+    let f_inicio = new Date(projects_Desarrollados[pos].fecha_inicio_de_año);
+    let f_fin = new Date(projects_Desarrollados[pos].fecha_añoFin)
     let diferencia_Dias = f_fin.getTime()-f_inicio.getTime();
     console.log(diferencia_Dias);
     return Math.round(diferencia_Dias/(1000*60*60*24))
 }
 
 
-function MostrarProyectos(){
+function VisualizarDatosprojects(){
     let escrito = "";
-    for (i in proyectos_Desarrollados) {
+    for (i in projects_Desarrollados) {
         escrito += `
             <tr class="odd:bg-white even:bg-slate-50">
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                    ${proyectos_Desarrollados[i].nom}
+                    ${projects_Desarrollados[i].nom}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${proyectos_Desarrollados[i].responsable}
+                    ${projects_Desarrollados[i].responsable}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${proyectos_Desarrollados[i].fecha_inicio_de_año}
+                    ${projects_Desarrollados[i].fecha_inicio_de_año}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
-                    ${proyectos_Desarrollados[i].fecha_añoFin}
+                    ${projects_Desarrollados[i].fecha_añoFin}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
                     ${Contador_De_Dias(i)}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">                                    
-                    <input type="button" onclick="Editar(${i})" value="Editar" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
+                    <input type="button" onclick="EditProject(${i})" value="EditProject" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
                     <input type="button" onclick="Eliminar(${i})" value="Eliminar" class="cursor-pointer bg-red-600 text-red-200 text-sm p-1 border border-red-800">
                     <input type="button" onclick="Vista_Rapida(${i})" value="Observar" class="cursor-pointer bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800">
                 </td>
@@ -149,7 +149,7 @@ function LimpiarDatos(){
 }
 
 //Esta es la funcion que permite agregar los datos a nuestro array
-function Insertar_Proyecto() {
+function Insertar_project() {
     persona = {
         cod: '',
         nom: '',
@@ -162,7 +162,7 @@ function Insertar_Proyecto() {
         dato_persona: ''
     }
 
-    //realizamos las validaciones del Responsable, del nombre del proyecto y del presupuesto.
+    //realizamos las validaciones del Responsable, del nombre del project y del presupuesto.
     if(ValidacionNombre() && Validacion_De_Responsable() && Validacion_De_Presupuesto()){
         persona.cod = inputCodigo.value;
         persona.nom = inputNombre.value;
@@ -173,76 +173,76 @@ function Insertar_Proyecto() {
         persona.presupuesto = inputPresupuesto.value;
         persona.tipo_persona = inputT_Persona.value;
         persona.dato_persona = inputDatos_Persona.value;
-        proyectos_Desarrollados.push(persona);
-        MostrarProyectos();
+        projects_Desarrollados.push(persona);
+        VisualizarDatosprojects();
         LimpiarDatos();
-        alert('PROYECTO REGISTRADO')
+        alert('project REGISTRADO')
     }else{
-        alert('AUN NO SE PUEDE REGISTRAR EL PROYECTO9')
+        alert('AUN NO SE PUEDE REGISTRAR EL project9')
     }
 }
 
 var boton_Agregar = document.getElementById("boton_Agregar");
-boton_Agregar.addEventListener('click', Insertar_Proyecto);
+boton_Agregar.addEventListener('click', Insertar_project);
 
 var boton_Actualizar = document.getElementById("boton_Actualizar");
 
-//Con esta Funcion podemos editar los datos suministrados.
-function Editar(pos){
+//Con esta Funcion podemos EditProject los datos suministrados.
+function EditProject(pos){
     lugar_Destino = pos;
-    inputCodigo.value = proyectos_Desarrollados[pos].cod;
-    inputNombre.value = proyectos_Desarrollados[pos].nom;
-    inputTipo.value = proyectos_Desarrollados[pos].tipo;
-    inputfecha_añoIni.value = proyectos_Desarrollados[pos].fecha_inicio_de_año;
-    inputfecha_añoFin.value = proyectos_Desarrollados[pos].fecha_añoFin;
-    inputResponsable.value = proyectos_Desarrollados[pos].responsable;
-    inputPresupuesto.value = proyectos_Desarrollados[pos].presupuesto;
-    inputT_Persona.value = proyectos_Desarrollados[pos].tipo_persona;
-    inputDatos_Persona.value = proyectos_Desarrollados[pos].dato_persona;
+    inputCodigo.value = projects_Desarrollados[pos].cod;
+    inputNombre.value = projects_Desarrollados[pos].nom;
+    inputTipo.value = projects_Desarrollados[pos].tipo;
+    inputfecha_añoIni.value = projects_Desarrollados[pos].fecha_inicio_de_año;
+    inputfecha_añoFin.value = projects_Desarrollados[pos].fecha_añoFin;
+    inputResponsable.value = projects_Desarrollados[pos].responsable;
+    inputPresupuesto.value = projects_Desarrollados[pos].presupuesto;
+    inputT_Persona.value = projects_Desarrollados[pos].tipo_persona;
+    inputDatos_Persona.value = projects_Desarrollados[pos].dato_persona;
     boton_Actualizar.classList.remove('hidden');
     boton_Agregar.classList.add('hidden');
 }
 
 //Con esta funcion Actualizamos los nuevos datos insertados.
 function Actualizar(){
-    proyectos_Desarrollados[lugar_Destino].cod = inputCodigo.value;
-    proyectos_Desarrollados[lugar_Destino].nom = inputNombre.value;
-    proyectos_Desarrollados[lugar_Destino].tipo = inputTipo.value;
-    proyectos_Desarrollados[lugar_Destino].fecha_inicio_de_año = inputfecha_añoIni.value;
-    proyectos_Desarrollados[lugar_Destino].fecha_añoFin = inputfecha_añoFin.value;
-    proyectos_Desarrollados[lugar_Destino].responsable = inputResponsable.value;
-    proyectos_Desarrollados[lugar_Destino].presupuesto = inputPresupuesto.value;
-    proyectos_Desarrollados[lugar_Destino].tipo_persona = inputT_Persona.value;
-    proyectos_Desarrollados[lugar_Destino].dato_persona = inputDatos_Persona.value;
+    projects_Desarrollados[lugar_Destino].cod = inputCodigo.value;
+    projects_Desarrollados[lugar_Destino].nom = inputNombre.value;
+    projects_Desarrollados[lugar_Destino].tipo = inputTipo.value;
+    projects_Desarrollados[lugar_Destino].fecha_inicio_de_año = inputfecha_añoIni.value;
+    projects_Desarrollados[lugar_Destino].fecha_añoFin = inputfecha_añoFin.value;
+    projects_Desarrollados[lugar_Destino].responsable = inputResponsable.value;
+    projects_Desarrollados[lugar_Destino].presupuesto = inputPresupuesto.value;
+    projects_Desarrollados[lugar_Destino].tipo_persona = inputT_Persona.value;
+    projects_Desarrollados[lugar_Destino].dato_persona = inputDatos_Persona.value;
     boton_Actualizar.classList.add('hidden');
     boton_Agregar.classList.remove('hidden');
-    MostrarProyectos();
+    VisualizarDatosprojects();
     LimpiarDatos();
 }
 boton_Actualizar.addEventListener('click', Actualizar);
 
 //Eliminamos los fila seleccionada del array
 function Eliminar(pos){
-    proyectos_Desarrollados.splice(pos, 1);
-    MostrarProyectos();
+    projects_Desarrollados.splice(pos, 1);
+    VisualizarDatosprojects();
 }
 
 //Esta funcion nos permite observar una vista rapida de todos los datos suministrados.
 function Vista_Rapida(pos){
     let escrito = `
-        Código: ${proyectos_Desarrollados[pos].cod}
-        Nombre: ${proyectos_Desarrollados[pos].nom}
-        Tipo: ${proyectos_Desarrollados[pos].tipo}
-        fecha_año Inicio: ${proyectos_Desarrollados[pos].fecha_inicio_de_año}
-        fecha_año Fin: ${proyectos_Desarrollados[pos].fecha_añoFin}
-        Responsable: ${proyectos_Desarrollados[pos].responsable}
-        Presupuesto: ${proyectos_Desarrollados[pos].presupuesto}
-        Tipo persona: ${proyectos_Desarrollados[pos].tipo_persona}
+        Código: ${projects_Desarrollados[pos].cod}
+        Nombre: ${projects_Desarrollados[pos].nom}
+        Tipo: ${projects_Desarrollados[pos].tipo}
+        fecha_año Inicio: ${projects_Desarrollados[pos].fecha_inicio_de_año}
+        fecha_año Fin: ${projects_Desarrollados[pos].fecha_añoFin}
+        Responsable: ${projects_Desarrollados[pos].responsable}
+        Presupuesto: ${projects_Desarrollados[pos].presupuesto}
+        Tipo persona: ${projects_Desarrollados[pos].tipo_persona}
     `;
-    if(proyectos_Desarrollados[pos].tipo_persona=="Estudiante"){
-        escrito += '  Semestre: '+ proyectos_Desarrollados[pos].dato_persona;
+    if(projects_Desarrollados[pos].tipo_persona=="Estudiante"){
+        escrito += '  Semestre: '+ projects_Desarrollados[pos].dato_persona;
     } else {
-        escrito += '  Tipo Profesor: ' + proyectos_Desarrollados[pos].dato_persona;
+        escrito += '  Tipo Profesor: ' + projects_Desarrollados[pos].dato_persona;
     }
 
     alert(escrito);

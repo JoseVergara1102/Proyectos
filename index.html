@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projects</title>
-    <link href="../dist/output.css" rel="stylesheet">
-
+    <title>Mis projects</title>
+    <link href="dist/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
     <style>
         .caja{
             border: 1px solid rgb(232, 20, 7);
@@ -16,13 +16,14 @@
     </style>
 </head>
 <body>
-
+    <main>
+        
     <nav class="md:bg-gray-800">
         <div class="container py-2 mx-auto px-10 flex flex-wrap items-center justify-between">
             
             <!-- BEGIN logo --> 
             <div  class="flex items-center">
-                <img src="images/logoproject.jpg" class="h-14">
+                <img src="src/images/logoproject.jpg" class="h-14">
                 <h2 class="font-bold text-white"> José Raúl Vergara Morillo</h2>
             </div>
             <!-- END logo -->
@@ -49,7 +50,7 @@
                         <a href="#" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Services</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Pricing</a>
+                        <a href="src/index.html" class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Pagina con Javascript</a>
                     </li>
                     <li>
                         <a href="#" class="block py-2 pr-4 pl-3 text-white hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Contact</a>
@@ -96,7 +97,7 @@
         </div>
     </nav>
 
-    <div class= bg-red-200 py-5">
+    <div class="bg-red-200 py-5">
         <div class="bg-slate-50 container mx-auto px-5 py-4 rounded-xl">
             
             <h1 class="font-bold text-center text-3xl">Mis projects</h1>
@@ -114,19 +115,22 @@
                             <table>
                                 <tr>
                                     <td>Código del project</td>
-                                    <td><input class="caja" type="text" name="codigo" id="codigo"></td>
+                                    <td>
+                                        <input class="caja" type="text" name="codigo" id="codigo" v-model="project.codigo" v-on:input="cadenas(project.codigo, project.nombre, project.responsable)">
+                                        <span id="errorResponsable" class="block text-xs text-red-600" v-if="s_Codigo">Datos no válidos en el responsable</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Nombre</td>
                                     <td>
-                                        <input class="caja" type="text" name="nombre" id="nombre" >
-                                        <span id="errorNombre" class="hidden text-xs text-red-600">Datos no válidos en el nombre</span>
+                                        <input class="caja" type="text" name="nombre" id="nombre" v-model="project.nombre" v-on:input="cadenas(project.codigo, project.nombre, project.responsable)">
+                                        <span id="errorResponsable" class="block text-xs text-red-600" v-if="s_Nombre">Datos no válidos en el responsable</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tipo project</td>
                                     <td>
-                                        <select name="tipo" id="tipo" class="caja">
+                                        <select name="tipo" id="tipo" class="caja" v-model="project.tipo">
                                             <option value="">Seleccione el Tipo de project...</option>
                                             <option value="Investigación">Investigación</option>
                                             <option value="Extensión">Extensión</option>
@@ -135,43 +139,47 @@
                                 </tr>
                                 <tr>
                                     <td>Fecha Inicio</td>
-                                    <td><input class="caja" type="date" name="fecha_año_ini" id="fecha_año_ini" min="2022-01-01"></td>
+
+                                    <td><input class="caja" type="date" name="fecha_año_ini" id="fecha_año_ini" min="2022-01-01" v-model="project.fechaIni"></td>
                                 </tr>
                                 <tr>
                                     <td>Fecha Finalización</td>
-                                    <td><input class="caja" type="date" name="fecha_año_fin" id="fecha_año_fin" max="2022-12-31" min="2022-01-01"></td>
+                                    <td><input class="caja" type="date" name="fecha_año_fin" id="fecha_año_fin" max="2022-12-31" min="2022-01-01" v-model="project.fechaFin"></td>
                                 </tr>
                                 <tr>
                                     <td>Responsable</td>
                                     <td>
-                                        <input class="caja" type="text" name="responsable" id="responsable">
-                                        <span id="errorResponsable" class="hidden text-xs text-red-600">Datos no válidos en el responsable</span>
+                                        <input class="caja" type="text" name="responsable" id="responsable" v-on:input="cadenas(project.codigo, project.nombre, project.responsable)" v-model="project.responsable">
+                                        <span class="block text-xs text-red-600" v-if="s_Responsable">Datos no válidos en el responsable</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Presupuesto</td>
                                     <td>
-                                        <input class="caja" type="text" name="presupuesto" id="presupuesto">
-                                        <span id="error_De_Presupuesto" class="hidden text-xs text-red-600"></span>
+                                        <input class="caja" type="text" name="presupuesto" id="presupuesto" v-model="project.presupuesto">
+                                        <span class="block text-xs text-green-600" v-if="project.presupuesto>=10000000&&project.presupuesto<=50000000">Presupuesto valido</span>
+                                        <span class="block text-xs text-red-600" v-else-if="project.presupuesto<10000000&&project.presupuesto>0">Debe ser mayor a $10.000.000</span>
+                                        <span class="block text-xs text-red-600" v-else-if="project.presupuesto>50000000">Debe ser menor a $50.000.000</span>
+                                        <span class="block text-xs text-red-600" v-else-if="isNaN(project.presupuesto)">Datos no válidos en el presupuesto</span>
                                     </td>
                                     
                                 </tr>
                                 <tr>
                                     <td>Tipo Persona</td>
                                     <td>
-                                        Estudiante
-                                        <input type="radio" name="tipo_persona" id="T_Estudiante" value="Estudiante">
-                                        Profesor
-                                        <input type="radio" name="tipo_persona" id="T_Profesor" value="Profesor">
+                                        <label for="T_Estudiante">Estudiante</label>
+                                        <input type="radio" name="tipo_persona" id="T_Estudiante" value="Estudiante" v-model="project.tipo_persona">
+                                        <label for="T_Profesor">Profesor</label>
+                                        <input type="radio" name="tipo_persona" id="T_Profesor" value="Profesor" v-model="project.tipo_persona">
                                     </td>
                                 </tr>
 
 
                                 <!-- Datos profesor -->
-                                <tr id="datos_del_profesor" class="hidden">
+                                <tr id="datos_del_profesor" v-if="project.tipo_persona=='Profesor'">
                                     <td>Tipo Profesor</td>
                                     <td>
-                                        <select name="tipo_profesor" id="tipo_profesor" class="hover:scale-110 caja">
+                                        <select name="tipo_profesor" id="tipo_profesor" class="hover:scale-110 caja" v-model="project.dato_persona">
                                             <option value="">Seleccione el Tipo...</option>
                                             <option value="Planta">Planta</option>
                                             <option value="Catedratico">Catedratico</option>
@@ -182,10 +190,10 @@
 
 
                                 <!-- Datos estudiante -->
-                                <tr id="datos_del_estudiante" class="hidden">
+                                <tr id="datos_del_estudiante" v-if="project.tipo_persona=='Estudiante'">
                                     <td>Semestre Estudiante</td>
                                     <td>
-                                        <select name="semestre" id="semestre" class="hover:scale-110 caja">
+                                        <select name="semestre" id="semestre" class="hover:scale-110 caja" v-model="project.dato_persona">
                                             <option value="">Seleccione el Semestre...</option>
                                             <option value="I">I</option>
                                             <option value="II">II</option>
@@ -206,9 +214,9 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <input type="button" id="boton_Agregar" value="Registrar project" class="text-white font-semibold bg-red-600 p-2 hover:bg-gray-700 cursor-pointer">
+                                        <input type="button" id="boton_Agregar" v-if="registro" @click="saveProject()" value="Registrar project" class="text-white font-semibold bg-red-600 p-2 hover:bg-gray-700 cursor-pointer">
                                         <br>
-                                        <input type="button" id="boton_Actualizar" value="Actualizar project" class="hidden bg-blue-400 p-2 border border-cyan-800 hover:bg-gray-700 cursor-pointer">
+                                        <input type="button" id="boton_Actualizar" v-if="!registro" @click="saveProject()" value="Actualizar project" class=" bg-blue-400 p-2 border border-cyan-800 hover:bg-gray-700 cursor-pointer">
                                     </td>
                                 </tr>
                                 
@@ -243,7 +251,30 @@
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
-                            
+                            <tr class="odd:bg-white even:bg-slate-50" v-for="(p, i) in projects">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                                    {{p.nombre}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                                    {{p.responsable}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                                    {{p.fechaIni}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                                    {{p.fechaFin}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                                    {{DiasTranscurridos(i)}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">                                    
+                                    <input type="button" @click="EditProject(i)" value="EditProject" class="cursor-pointer bg-green-600 text-green-200 text-sm p-1 border border-green-800">
+                                    <input type="button" @click="Eliminar(i)" value="Eliminar" class="cursor-pointer bg-red-600 text-red-200 text-sm p-1 border border-red-800">
+                                    <button  @click="VisualizarDatos(i)" class="cursor-pointer bg-yellow-600 h-modal text-yellow-200 text-sm p-1 border border-yellow-800" type="button" modal-toggle="defaultModal" data-modal-show="true">
+                                        Observar
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -251,13 +282,44 @@
 
         </div>
     </div>
+  
+  <!-- Main modal -->
+  <div id="defaultModal"  tabindex="-1" class="overflow-y-auto hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
+      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white" v-html="titulo">
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                      <span class="sr-only">Close modal</span>
+                  </button>
+              </div>
+              <!-- Modal body -->
+              <div class="p-6 space-y-6">
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="infoP">
+                  </p>
+              </div>
+              <!-- Modal footer -->
+              <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                  <button data-modal-toggle="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cerrar</button>
+              </div>
+          </div>
+      </div>
+  </div>
 
+    </main>
+  
     <footer class="bg-red-600 text-center font-bold text-black py-5 text-sm">
         <div class="flex justify-center"><img src="images/logou2.png" alt=""></div>
         <div>Universidad de Córdoba</div>
         <div>Trabajo Javascript Desarrollo Web 1</div>
     </footer>
-    
-    <script src="scripts/myscript.js"></script>
+    <script src="scripts/vue.js"></script>
+    <script src="scripts/vueCRud.JS"></script>
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <!-- <script src="scripts/myscript.js"></script> -->
 </body>
 </html>
