@@ -27,11 +27,7 @@
             
             <!-- BEGIN logo --> 
             <div  class="flex items-center">
-<<<<<<< HEAD
-                <img src="src/images/logoproject.jpg" class="h-14">
-=======
                 <img src="src/images/logoproyecto.jpg" class="h-14">
->>>>>>> ac12dd4ad8e32b6d869e906b6ce5e630cd450354
                 <h2 class="font-bold text-white"> José Raúl Vergara Morillo</h2>
             </div>
             <!-- END logo -->
@@ -153,7 +149,6 @@
                                 <tr>
                                     <td>Nombre</td>
                                     <td>
-<<<<<<< HEAD
                                         <input class="caja" type="text" name="nombre" id="nombre" v-model="project.nombre" v-on:input="cadenas(project.codigo, project.nombre, project.responsable)">
                                         <span id="errorResponsable" class="block text-xs text-red-600" v-if="s_Nombre">Datos no válidos en el responsable</span>
                                     </td>
@@ -163,17 +158,6 @@
                                     <td>
                                         <select name="tipo" id="tipo" class="caja" v-model="project.tipo">
                                             <option value="">Seleccione el Tipo de project...</option>
-=======
-                                        <input class="caja" type="text" name="nombre" id="nombre" v-model="proyecto.nombre" v-on:input="comprobarCadenas(proyecto.codigo, proyecto.nombre, proyecto.responsable)">
-                                        <span id="errorResponsable" class="block text-xs text-red-600" v-if="simNombre">Datos no válidos en el responsable</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tipo Proyecto</td>
-                                    <td>
-                                        <select name="tipo" id="tipo" class="caja" v-model="proyecto.tipo">
-                                            <option value="">Seleccione el Tipo de Proyecto...</option>
->>>>>>> ac12dd4ad8e32b6d869e906b6ce5e630cd450354
                                             <option value="Investigación">Investigación</option>
                                             <option value="Extensión">Extensión</option>
                                         </select>
